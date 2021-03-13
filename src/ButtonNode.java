@@ -18,6 +18,31 @@ public class ButtonNode extends javax.swing.JButton {
     ButtonNode Rigth;
     ButtonNode Left;
     ButtonNode Down;
+    private int CountOfButtonsAround = 0;
+    private ButtonNode[] Around = new ButtonNode[4];
+
+    public int CountOfButtonsAround() {
+        return CountOfButtonsAround;
+    }
+
+    public void FindCountOfButtonsAround() {
+        if (!isTheUpNull()) {
+            Around[CountOfButtonsAround++] = Up;
+        }
+        if (!isTheDownNull()) {
+            Around[CountOfButtonsAround++] = Down;
+        }
+        if (!isTheRigthNull()) {
+            Around[CountOfButtonsAround++] = Rigth;
+        }
+        if (!isTheLeftNull()) {
+            Around[CountOfButtonsAround++] = Left;
+        }
+    }
+
+    public ButtonNode[] ButtonsAround() {
+        return Around;
+    }
 
     public boolean isTheUpNull() {
         return Up == null;
@@ -33,5 +58,12 @@ public class ButtonNode extends javax.swing.JButton {
 
     public boolean isTheLeftNull() {
         return Left == null;
+    }
+
+    /**
+     * @return the CountOfButtonsAround
+     */
+    public int getCountOfButtonsAround() {
+        return CountOfButtonsAround;
     }
 }

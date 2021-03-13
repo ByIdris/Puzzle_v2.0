@@ -18,7 +18,7 @@ public class Design implements IPuzzle {
 
     private ButtonNode Start, Rows, Item, Temp;
     private Size size;
-    private int index, Seconds, Counter, Rnd, CountsOfButtonsAround;
+    private int index, Seconds, Counter, Rnd;
     private Timer _Timer;
     private ActionListener AL;
     private Random Rand;
@@ -35,6 +35,10 @@ public class Design implements IPuzzle {
             Seconds++;
         });
         Create();
+        while (hasNext()) {
+            Temp.FindCountOfButtonsAround();
+        }
+        ResetLocation();
     }
 
     private void addR() {
@@ -172,24 +176,6 @@ public class Design implements IPuzzle {
         Seconds = 0;
     }
 
-    private ButtonNode[] ButtonsAround() {
-        CountsOfButtonsAround = 0;
-        ButtonNode[] Around = new ButtonNode[4];
-        if (!Temp.isTheUpNull()) {
-            Around[CountsOfButtonsAround++] = Temp.Up;
-        }
-        if (!Temp.isTheDownNull()) {
-            Around[CountsOfButtonsAround++] = Temp.Down;
-        }
-        if (!Temp.isTheRigthNull()) {
-            Around[CountsOfButtonsAround++] = Temp.Rigth;
-        }
-        if (!Temp.isTheLeftNull()) {
-            Around[CountsOfButtonsAround++] = Temp.Left;
-        }
-        return Around;
-    }
-
     @Override
     public ButtonNode next() {
         return Temp;
@@ -214,10 +200,9 @@ public class Design implements IPuzzle {
         if (!Temp.getText().equals("")) {
             FindEmpty();
         }
-        for (int i = 0; i < 100000; i++) {
-            ButtonNode[] Around = ButtonsAround();
-            Rnd = Rand.nextInt(CountsOfButtonsAround);
-            ButtonTextChanging(Around[Rnd], Temp);
+        for (int i = 0; i < 200000; i++) {
+            Rnd = Rand.nextInt(Temp.CountOfButtonsAround());
+            ButtonTextChanging(Temp.ButtonsAround()[Rnd], Temp);
         }
         ResetVeriable();
     }
@@ -233,8 +218,7 @@ public class Design implements IPuzzle {
         TimerStateChange(false);
         ResetVeriable();
         index = 1;
-        Rows = Start;
-        Item = Rows;
+        ResetLocation();
         while (hasNext()) {
             Temp.setText(String.valueOf(index++));
         }
