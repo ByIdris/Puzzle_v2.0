@@ -26,11 +26,17 @@ public class Puzzle extends javax.swing.JFrame {
         jMenuItem2.addActionListener((ActionEvent e) -> {
             design.Reset();
         });
+        jMenuItem3.addActionListener((ActionEvent e) -> {
+            jPanel1.removeAll();
+            this.setVisible(false);
+            Difficult D = new Difficult(this, size);
+            D.setVisible(true);
+        });
         size = new Size();
         size.setRows(3);
         size.setCols(3);
         Difficult D = new Difficult(this, size);
-        D.show();
+        D.setVisible(true);
     }
 
     /**
@@ -74,11 +80,6 @@ public class Puzzle extends javax.swing.JFrame {
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, 0));
         jMenuItem3.setText("Difficult");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
         jMenu2.add(jMenuItem3);
 
         jMenuBar1.add(jMenu2);
@@ -115,13 +116,6 @@ public class Puzzle extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }//GEN-LAST:event_formComponentShown
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        jPanel1.removeAll();
-        this.setVisible(false);
-        Difficult D = new Difficult(this, size);
-        D.setVisible(true);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
